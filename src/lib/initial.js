@@ -15,11 +15,13 @@ function initial() {
   colorMode(HSB)
 
   // 使用カラー設定
-  colors.background = color(0, 0, 98)
-  colors.line = color(0, 0, 0)
-  colors.machineMain = color(200, 20, 80)
-  colors.machineMainLight = color(200, 20, 100)
-  colors.machineMainShadow = color(200, 20, 50)
+  colors.background = color(0, 0, 20)
+  colors.line = color(0, 0, 60)
+  colors.machineMain = color(220, 10, 40)
+  colors.machineLight = color(220, 10, 60)
+  colors.machineDark = color(220, 10, 10)
+  colors.buttonNormal = color(0, 0, 100)
+  colors.shadow = color(0, 0, 0, 50)
 
   // キャンバスの設定
   createCanvas(windowWidth * 0.99, windowHeight * 0.99)
@@ -33,5 +35,8 @@ function initial() {
   framePos.x = centerPos.x - frameSize.width / 2
   framePos.y = centerPos.y - frameSize.height / 2
 
-  console.log('lerp(framePos.x, centerPos.x, 0.5)', lerp(framePos.x, centerPos.x, 0.5))
+  pushButtonSize = min(frameSize.width, frameSize.height) * 0.15
+
+  mainButtonPos.x = centerPos.x
+  mainButtonPos.y = framePos.y + frameSize.height * 0.15
 }

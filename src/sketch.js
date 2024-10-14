@@ -6,4 +6,7 @@ function draw() {
   // UIの描画
   drawBackground()
   drawFrame()
+  drawMainButtonArea()
+  drawPlayButton()
+  drawStopButton()
 }

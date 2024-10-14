@@ -11,3 +11,7 @@ const frameSize = {}
 
 // x, y
 const framePos = {}
+
+let pushButtonSize
+
+const mainButtonPos = {}
