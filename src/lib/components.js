@@ -3,12 +3,14 @@
 // --------------------------------------------------
 function pushButton(pos, buttonColor, iconShape) {
   drawBlock(() => {
-    noStroke()
     rectMode(CENTER)
-    // チョイずらし
-    fill(colors.shadow)
-    rect(pos.x + 6, pos.y + 5, pushButtonSize, pushButtonSize)
 
+    // 影
+    noStroke()
+    fill(colors.shadow)
+    rect(pos.x + 5, pos.y + 5, pushButtonSize * 1.08, pushButtonSize * 1.06, 3)
+
+    // ボタン
     fill(buttonColor)
     stroke(colors.line)
     strokeWeight(2)
