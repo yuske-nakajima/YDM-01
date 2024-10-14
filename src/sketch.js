@@ -17,7 +17,7 @@ function setup() {
   strokeWeight(0)
   textAlign(CENTER, CENTER)
   textSize(min(width, height) / 10)
-  text("Hello World", width / 2, height / 2)
+  text('Hello World', width / 2, height / 2)
 }
 
 function draw() {

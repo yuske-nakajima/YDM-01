@@ -1,0 +1,14 @@
+{
+  "name": "ydm-01",
+  "version": "1.0.0",
+  "description": "ステップ・シーケンサー",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{js,html,css}\""
+  },
+  "author": "yuske-nakajima",
+  "license": "MIT",
+  "thirdPartyNotices": "THIRD_PARTY_NOTICES.md",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
