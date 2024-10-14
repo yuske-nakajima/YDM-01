@@ -7,3 +7,9 @@
 
 ### 音色
 - [Web Audio API](https://developer.mozilla.org/ja/docs/Web/API/Web_Audio_API)
+
+## 開発
+```bash
+npm install
+npm run dev
+```
