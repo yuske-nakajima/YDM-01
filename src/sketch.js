@@ -1,17 +1,3 @@
-function play() {
-  onBeat = beatCount % BEAT
-
-  for (let i = 0; i < BEAT; i++) {
-    for (let j = 0; j < musicList.length; j++) {
-      if (onBeat === i) {
-        if (beatData.get(currentPatternNum)[j][i]) {
-          musicList[j][1](musicGainList[j])
-        }
-      }
-    }
-  }
-}
-
 function setup() {
   initial()
 
@@ -43,24 +29,44 @@ function draw() {
   drawStopButton()
   drawPatternButton()
 
-  // 現在の時間（ミリ秒）を取得
-  const currentTime = millis()
+  if (isPlaying) {
+    const currentTime = millis()
+    const beatInterval = 60000 / 4 / bpm
 
-  // 1ビートの長さをミリ秒で計算
-  const beatInterval = 60000 / 4 / bpm
+    lastBeatTime = lastBeatTime || currentTime
 
-  lastBeatTime = lastBeatTime || currentTime
+    if (currentTime - lastBeatTime >= beatInterval) {
+      play()
+      beatCount++
+      lastBeatTime = currentTime
 
-  // 総拍数から現在の拍数を計算
-  if (currentTime - lastBeatTime >= beatInterval) {
-    play()
-    beatCount++
-    lastBeatTime = currentTime
+      if (isStopping && beatCount % BEAT === 0) {
+        isPlaying = false
+        isStopping = false
+        beatCount = 0
+        onBeat = 0
+        console.log('Sequencer stopped at end of bar')
+      }
+    }
+  }
+}
+
+function play() {
+  onBeat = beatCount % BEAT
+
+  for (let i = 0; i < BEAT; i++) {
+    for (let j = 0; j < musicList.length; j++) {
+      if (onBeat === i) {
+        if (beatData.get(currentPatternNum)[j][i]) {
+          musicList[j][1](musicGainList[j])
+        }
+      }
+    }
   }
 }
 
 function mousePressed() {
-  // マウスを押したときにドラムマシンのデータを更新
+  // シーケンサーのマス目クリック判定
   const posY = lightPos.y - seqAreaSize.height * 0.85
   const gap = lightGap * 0.95
 
@@ -69,16 +75,14 @@ function mousePressed() {
       const x = lightPos.x + lightSize + lightGap * j
       const y = posY + lightSize + gap * i
 
-      // マスの左上と右下の座標を計算
       const left = x - lightSize
       const right = x + lightSize
       const top = y - lightSize
       const bottom = y + lightSize
 
-      // クリックがマスの範囲内かチェック
       if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
         beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
-        return // クリックされたマスが見つかったらループを抜ける
+        return
       }
     }
   }
@@ -87,13 +91,18 @@ function mousePressed() {
   if (isButtonClicked(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y)) {
     isPlaying = true
     isStopping = false
-    beatCount = 0
+    if (beatCount === 0 || beatCount % BEAT === 0) {
+      lastBeatTime = millis()
+    }
+    console.log('Play button clicked. isPlaying:', isPlaying)
   }
   // Stop ボタンの判定
   else if (isButtonClicked(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y)) {
     if (isPlaying) {
-      isPlaying = false
       isStopping = true
+      console.log('Stop button clicked. Waiting for end of bar to stop.')
+    } else {
+      console.log('Sequencer is already stopped.')
     }
   }
 }
