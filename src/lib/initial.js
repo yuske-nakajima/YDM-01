@@ -104,7 +104,8 @@ function initial() {
 
   bpm = 120
 
-  isPlaying = true
+  isPlaying = false
+  isStopping = true
 
   audioContext = new (window.AudioContext || window.webkitAudioContext)()
 }

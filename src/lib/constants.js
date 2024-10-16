@@ -85,5 +85,6 @@ let bpm
 let onBeat
 
 let isPlaying
+let isStopping
 
 let audioContext

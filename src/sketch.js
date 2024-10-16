@@ -77,11 +77,28 @@ function mousePressed() {
 
       // クリックがマスの範囲内かチェック
       if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
-        console.log(`Clicked on cell at row ${i}, column ${j}`)
-        // ここでクリックされたマスに対する処理を行う
         beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
         return // クリックされたマスが見つかったらループを抜ける
       }
     }
   }
+
+  // Play ボタンの判定
+  if (isButtonClicked(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y)) {
+    isPlaying = true
+    isStopping = false
+    beatCount = 0
+  }
+  // Stop ボタンの判定
+  else if (isButtonClicked(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y)) {
+    if (isPlaying) {
+      isPlaying = false
+      isStopping = true
+    }
+  }
+}
+
+function isButtonClicked(x, y) {
+  const d = dist(mouseX, mouseY, x, y)
+  return d < pushButtonSize / 2
 }
