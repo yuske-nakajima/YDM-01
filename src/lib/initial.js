@@ -22,6 +22,7 @@ function initial() {
   colors.machineLight = color(220, 10, 60)
   colors.machineDark = color(220, 10, 10)
   colors.buttonNormal = color(50, 10, 98)
+  colors.buttonLight = color(0, 50, 100)
   colors.shadow = color(0, 50, 25)
   colors.textMain = color(220, 70, 50)
   colors.displayMain = color(120, 90, 70)

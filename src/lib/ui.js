@@ -68,6 +68,65 @@ function drawTempoDisplay() {
   })
 }
 
+function drawSeqLightsFrame() {
+  const lightSize = seqAreaSize.width * 0.02
+  const lightGap = (seqAreaSize.width / BEAT) * 0.9
+  const lightPos = {
+    x: seqAreaPos.x - seqAreaSize.width * 0.4,
+    y: seqAreaPos.y + seqAreaSize.height * 0.4,
+  }
+
+  for (let i = 0; i < 16; i++) {
+    const x = lightPos.x + lightSize + lightGap * i
+    const y = lightPos.y
+    drawBlock(() => {
+      ellipseMode(CENTER)
+
+      // 台
+      stroke(colors.line)
+
+      if (i % 4 === 0) {
+        strokeWeight(lightSize * 0.4)
+      } else {
+        strokeWeight(lightSize * 0.1)
+      }
+
+      fill(colors.machineMain)
+      ellipse(x, y, lightSize, lightSize)
+    })
+  }
+}
+
+function drawSeqLights(
+  onBeat, // number
+) {
+  const lightSize = seqAreaSize.width * 0.02
+  const lightGap = (seqAreaSize.width / BEAT) * 0.9
+  const lightPos = {
+    x: seqAreaPos.x - seqAreaSize.width * 0.4,
+    y: seqAreaPos.y + seqAreaSize.height * 0.4,
+  }
+
+  for (let i = 0; i < 16; i++) {
+    const x = lightPos.x + lightSize + lightGap * i
+    const y = lightPos.y
+    drawBlock(() => {
+      ellipseMode(CENTER)
+      stroke(colors.line)
+      strokeWeight(lightSize * 0.1)
+
+      // 点灯
+      if (i === onBeat) {
+        fill(colors.buttonLight)
+        ellipse(x, y, lightSize * 0.9)
+      } else {
+        fill(colors.machineMain)
+        ellipse(x, y, lightSize)
+      }
+    })
+  }
+}
+
 // コントロール
 function drawPlayButton() {
   pushButton(createVector(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y), colors.buttonNormal, (pos, color) => {

@@ -1,10 +1,3 @@
-function beatEvent() {
-  // デバッグ TODO: 本番では削除
-  const onBeat = beatCount % BEAT
-  console.clear()
-  console.log('beat: ', onBeat)
-}
-
 function setup() {
   initial()
 
@@ -18,12 +11,15 @@ function setup() {
   drawSeqsArea()
   // ディスプレイ
   drawTempoDisplay()
+  drawSeqLightsFrame()
   // コントロール
   drawTempoKnob()
 }
 
 function draw() {
   // UIの描画
+  // ディスプレイ
+  drawSeqLights(onBeat)
   // コントロール
   drawPlayButton()
   drawStopButton()
@@ -37,9 +33,9 @@ function draw() {
 
   lastBeatTime = lastBeatTime || currentTime
 
-  // 次のビートの時間になったらビートイベントを実行
+  // 総拍数から現在の拍数を計算
   if (currentTime - lastBeatTime >= beatInterval) {
-    beatEvent()
+    onBeat = beatCount % BEAT
     beatCount++
     lastBeatTime = currentTime
   }

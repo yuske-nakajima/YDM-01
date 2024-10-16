@@ -61,3 +61,5 @@ let beatData = new Map()
 const musicList = []
 
 let bpm
+
+let onBeat
