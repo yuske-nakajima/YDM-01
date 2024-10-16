@@ -97,9 +97,7 @@ function drawSeqLightsFrame() {
   }
 }
 
-function drawSeqLights(
-  onBeat, // number
-) {
+function drawSeqLights() {
   const lightSize = seqAreaSize.width * 0.02
   const lightGap = (seqAreaSize.width / BEAT) * 0.9
   const lightPos = {
@@ -125,6 +123,22 @@ function drawSeqLights(
       }
     })
   }
+}
+
+function drawTempoNumber() {
+  const pos = {
+    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.15,
+    y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
+  }
+
+  drawBlock(() => {
+    rectMode(CENTER)
+    noStroke()
+    fill(colors.displayText)
+    textSize(mainButtonAreaSize.width * 0.1)
+    textAlign(CENTER, CENTER)
+    text(bpm, pos.x, pos.y)
+  })
 }
 
 // コントロール

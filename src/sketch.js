@@ -19,7 +19,8 @@ function setup() {
 function draw() {
   // UIの描画
   // ディスプレイ
-  drawSeqLights(onBeat)
+  drawSeqLights()
+  drawTempoNumber()
   // コントロール
   drawPlayButton()
   drawStopButton()

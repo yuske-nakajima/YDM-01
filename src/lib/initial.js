@@ -27,7 +27,7 @@ function initial() {
   colors.textMain = color(220, 70, 50)
   colors.displayMain = color(120, 90, 70)
   colors.displayLine = color(120, 70, 50)
-
+  colors.displayText = color(120, 70, 95)
   // キャンバスの設定
   createCanvas(windowWidth * 0.99, windowHeight * 0.99)
 
