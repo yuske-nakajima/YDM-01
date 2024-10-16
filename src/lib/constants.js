@@ -45,6 +45,15 @@ const seqAreaSize = {}
 // x, y
 const seqAreaPos = {}
 
+// number
+let lightSize
+
+// number
+let lightGap
+
+// x, y
+const lightPos = {}
+
 // MUSIC
 const BEAT = 16
 const PATTERN_MAX = 4

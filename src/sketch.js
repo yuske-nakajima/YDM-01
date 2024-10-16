@@ -9,6 +9,7 @@ function setup() {
   drawTempoKnobArea()
   drawPatternButtonArea()
   drawSeqsArea()
+  drawSeqsName()
   // ディスプレイ
   drawTempoDisplay()
   drawSeqLightsFrame()
@@ -18,6 +19,8 @@ function setup() {
 
 function draw() {
   // UIの描画
+  // フレーム
+  drawSeqsFrame()
   // ディスプレイ
   drawSeqLights()
   drawTempoNumber()

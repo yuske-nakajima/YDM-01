@@ -63,7 +63,11 @@ function initial() {
   seqAreaPos.x = centerPos.x
   seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
 
-  // フレーム
+  lightSize = seqAreaSize.width * 0.02
+  lightGap = (seqAreaSize.width / BEAT) * 0.9
+  lightPos.x = seqAreaPos.x - seqAreaSize.width * 0.4
+  lightPos.y = seqAreaPos.y + seqAreaSize.height * 0.4
+
   frameSize.width = frameGuideSize.width
   frameSize.height = mainButtonAreaSize.height + gapY + seqAreaSize.height + gapY * 0.6
 

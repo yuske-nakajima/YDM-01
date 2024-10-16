@@ -41,6 +41,49 @@ function drawSeqsArea() {
   buttonArea(seqAreaPos, seqAreaSize, 'small')
 }
 
+function drawSeqsName() {
+  // musicList から取得
+  const posY = lightPos.y - seqAreaSize.height * 0.85
+  const gap = lightGap * 0.95
+
+  for (let i = 0; i < musicList.length; i++) {
+    const x = lightPos.x - lightSize * 2.5
+    const y = posY + lightSize + gap * i
+
+    drawBlock(() => {
+      rectMode(CENTER)
+      noStroke()
+      fill(colors.machineDark)
+      textSize(mainButtonAreaSize.width * 0.06)
+      textAlign(CENTER, CENTER)
+      text(musicList[i][0], x, y)
+    })
+  }
+}
+
+function drawSeqsFrame() {
+  const posY = lightPos.y - seqAreaSize.height * 0.85
+  const gap = lightGap * 0.95
+
+  for (let i = 0; i < beatData.get(currentPatternNum).length; i++) {
+    for (let j = 0; j < beatData.get(currentPatternNum)[i].length; j++) {
+      const x = lightPos.x + lightSize + lightGap * j
+      const y = posY + lightSize + gap * i
+
+      drawBlock(() => {
+        rectMode(CENTER)
+        noStroke()
+        strokeWeight(lightSize * 0.1)
+
+        const cellColor = onBeat === j ? colors.machineLight : colors.machineMain
+
+        fill(cellColor)
+        rect(x, y, lightSize * 2)
+      })
+    }
+  }
+}
+
 // ディスプレイ
 function drawTempoDisplay() {
   const pos = {
@@ -69,13 +112,6 @@ function drawTempoDisplay() {
 }
 
 function drawSeqLightsFrame() {
-  const lightSize = seqAreaSize.width * 0.02
-  const lightGap = (seqAreaSize.width / BEAT) * 0.9
-  const lightPos = {
-    x: seqAreaPos.x - seqAreaSize.width * 0.4,
-    y: seqAreaPos.y + seqAreaSize.height * 0.4,
-  }
-
   for (let i = 0; i < 16; i++) {
     const x = lightPos.x + lightSize + lightGap * i
     const y = lightPos.y
@@ -98,13 +134,6 @@ function drawSeqLightsFrame() {
 }
 
 function drawSeqLights() {
-  const lightSize = seqAreaSize.width * 0.02
-  const lightGap = (seqAreaSize.width / BEAT) * 0.9
-  const lightPos = {
-    x: seqAreaPos.x - seqAreaSize.width * 0.4,
-    y: seqAreaPos.y + seqAreaSize.height * 0.4,
-  }
-
   for (let i = 0; i < 16; i++) {
     const x = lightPos.x + lightSize + lightGap * i
     const y = lightPos.y
