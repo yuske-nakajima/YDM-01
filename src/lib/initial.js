@@ -68,4 +68,34 @@ function initial() {
 
   framePos.x = centerPos.x
   framePos.y = frameGuidePos.y + frameSize.height / 2
+
+  // MUSIC
+  musicList[0] = ['kick', sounds.kick[6]]
+  musicList[1] = ['snare', sounds.snare[7]]
+  musicList[2] = ['hihat_c', sounds.hihat_c[7]]
+  musicList[3] = ['hihat_o', sounds.hihat_o[7]]
+  musicList[4] = ['tom', sounds.tom[4]]
+  musicList[5] = ['crash', sounds.crash[7]]
+  musicList[6] = ['cowbell', sounds.cowbell[5]]
+  musicList[7] = ['clap', sounds.clap[7]]
+
+  beatCount = 0
+  lastBeatTime = 0
+  currentPertternNum = 1
+
+  // バターン * 音色数 * ビート
+  // データの初期化
+  for (let i = 1; i <= PATTERN_MAX; i++) {
+    const arr = []
+    for (let m = 0; m < musicList.length; m++) {
+      const innerArr = []
+      for (let b = 0; b < BEAT; b++) {
+        innerArr.push(false)
+      }
+      arr.push(innerArr)
+    }
+    beatData.set(i, arr)
+  }
+
+  bpm = 120
 }

@@ -1,6 +1,8 @@
 // --------------------------------------------------
 // 定数を定義するファイル
 // --------------------------------------------------
+
+// UI
 // [string]: p5.Color
 const colors = {}
 
@@ -42,3 +44,20 @@ const seqAreaSize = {}
 
 // x, y
 const seqAreaPos = {}
+
+// MUSIC
+const BEAT = 16
+const PATTERN_MAX = 4
+
+// 拍の回数
+let beatCount
+
+let lastBeatTime
+
+let currentPertternNum
+
+let beatData = new Map()
+
+const musicList = []
+
+let bpm
