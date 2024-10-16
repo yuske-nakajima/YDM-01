@@ -216,34 +216,56 @@ function drawPatternButton() {
 }
 
 function drawTempoKnob() {
-  const pos = {
-    x: tempoKnobPos.x + mainButtonAreaSize.width * 0.18,
-    y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
-  }
-
-  const size = {
-    width: mainButtonAreaSize.width * 0.2,
-    height: mainButtonAreaSize.width * 0.2,
-  }
-
   drawBlock(() => {
     ellipseMode(CENTER)
 
     // 影
     noStroke()
     fill(colors.shadow)
-    ellipse(pos.x + 3, pos.y + 3, size.width * 1.06, size.height * 1.08)
+    ellipse(
+      tempoKnobControlPos.x + 3,
+      tempoKnobControlPos.y + 3,
+      tempoKnobControlSize.width * 1.06,
+      tempoKnobControlSize.height * 1.08,
+    )
 
     // ノブ
     fill(colors.buttonNormal)
     stroke(colors.line)
-    strokeWeight(size.width * 0.05)
-    ellipse(pos.x, pos.y, size.width, size.height)
+    strokeWeight(tempoKnobControlSize.width * 0.05)
+    ellipse(tempoKnobControlPos.x, tempoKnobControlPos.y, tempoKnobControlSize.width, tempoKnobControlSize.height)
 
     // 内側
     noFill()
     stroke(colors.line)
-    strokeWeight(size.width * 0.02)
-    ellipse(pos.x, pos.y, size.width * 0.5)
+    strokeWeight(tempoKnobControlSize.width * 0.02)
+    ellipse(tempoKnobControlPos.x, tempoKnobControlPos.y, tempoKnobControlSize.width * 0.5)
+  })
+}
+
+function drawTempoKnobIndicator() {
+  const startAngle = HALF_PI // 9時から開始
+  const endAngle = map(bpm, MIN_BPM, MAX_BPM, 0, TWO_PI) + startAngle
+
+  drawBlock(() => {
+    noFill()
+    stroke(colors.buttonhalfDark) // アクセントカラーを使用
+    strokeWeight(tempoKnobControlSize.width * 0.03)
+    arc(
+      tempoKnobControlPos.x,
+      tempoKnobControlPos.y,
+      tempoKnobControlSize.width * 0.8,
+      tempoKnobControlSize.height * 0.8,
+      startAngle,
+      endAngle,
+    )
+
+    // 現在の値を示す点を描画
+    fill(colors.shadow)
+    noStroke()
+    const pointAngle = endAngle
+    const pointX = tempoKnobControlPos.x + cos(pointAngle) * (tempoKnobControlSize.width * 0.4)
+    const pointY = tempoKnobControlPos.y + sin(pointAngle) * (tempoKnobControlSize.height * 0.4)
+    ellipse(pointX, pointY, tempoKnobControlSize.width * 0.2)
   })
 }

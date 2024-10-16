@@ -54,6 +54,12 @@ let lightGap
 // x, y
 const lightPos = {}
 
+// x, y
+const tempoKnobControlPos = {}
+
+// width, height
+const tempoKnobControlSize = {}
+
 // MUSIC
 const BEAT = 16
 const PATTERN_MAX = 4
@@ -88,3 +94,6 @@ let isPlaying
 let isStopping
 
 let audioContext
+
+const MIN_BPM = 0
+const MAX_BPM = 240

@@ -21,6 +21,7 @@ function initial() {
   colors.machineSub = color(220, 10, 70)
   colors.machineLight = color(220, 10, 60)
   colors.machineDark = color(220, 10, 10)
+  colors.buttonhalfDark = color(50, 10, 70)
   colors.buttonNormal = color(50, 10, 98)
   colors.buttonLight = color(0, 50, 100)
   colors.shadow = color(0, 50, 25)
@@ -73,6 +74,11 @@ function initial() {
 
   framePos.x = centerPos.x
   framePos.y = frameGuidePos.y + frameSize.height / 2
+
+  tempoKnobControlPos.x = tempoKnobPos.x + mainButtonAreaSize.width * 0.18
+  tempoKnobControlPos.y = tempoKnobPos.y - mainButtonAreaSize.height * 0.125
+  tempoKnobControlSize.width = mainButtonAreaSize.width * 0.2
+  tempoKnobControlSize.height = mainButtonAreaSize.width * 0.2
 
   // MUSIC
   musicList[0] = ['kick', sounds.kick[6]]

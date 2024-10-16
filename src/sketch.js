@@ -28,6 +28,7 @@ function draw() {
   drawPlayButton()
   drawStopButton()
   drawPatternButton()
+  drawTempoKnobIndicator()
 
   if (isPlaying) {
     const currentTime = millis()
