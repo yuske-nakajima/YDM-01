@@ -44,11 +44,11 @@ function drawSeqsArea() {
 // ディスプレイ
 function drawTempoDisplay() {
   const pos = {
-    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.2,
+    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.15,
     y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
   }
-  const displaySize = {
-    width: mainButtonAreaSize.width * 0.5,
+  const size = {
+    width: mainButtonAreaSize.width * 0.35,
     height: mainButtonAreaSize.height * 0.5,
   }
 
@@ -58,13 +58,13 @@ function drawTempoDisplay() {
     // 影
     noStroke()
     fill(colors.displayLine)
-    rect(pos.x + 6, pos.y + 4, displaySize.width * 1.01, displaySize.height * 1.01, 5)
+    rect(pos.x + 6, pos.y + 4, size.width * 1.01, size.height * 1.01, 5)
 
     // ディスプレイ
     stroke(colors.displayLine)
     strokeWeight(4)
     fill(colors.displayMain)
-    rect(pos.x, pos.y, displaySize.width, displaySize.height, 5)
+    rect(pos.x, pos.y, size.width, size.height, 5)
   })
 }
 
@@ -99,4 +99,37 @@ function drawPertternButton() {
     }
     pertternButton(pos, colors.buttonNormal, i + 1)
   }
+}
+
+function drawTempoKnob() {
+  const pos = {
+    x: tempoKnobPos.x + mainButtonAreaSize.width * 0.18,
+    y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
+  }
+
+  const size = {
+    width: mainButtonAreaSize.width * 0.2,
+    height: mainButtonAreaSize.width * 0.2,
+  }
+
+  drawBlock(() => {
+    ellipseMode(CENTER)
+
+    // 影
+    noStroke()
+    fill(colors.shadow)
+    ellipse(pos.x + 3, pos.y + 3, size.width * 1.06, size.height * 1.08)
+
+    // ノブ
+    fill(colors.buttonNormal)
+    stroke(colors.line)
+    strokeWeight(size.width * 0.05)
+    ellipse(pos.x, pos.y, size.width, size.height)
+
+    // 内側
+    noFill()
+    stroke(colors.line)
+    strokeWeight(size.width * 0.02)
+    ellipse(pos.x, pos.y, size.width * 0.5)
+  })
 }

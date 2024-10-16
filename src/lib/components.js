@@ -83,7 +83,7 @@ function pushButton(pos, buttonColor, iconShape) {
     // ボタン
     fill(buttonColor)
     stroke(colors.line)
-    strokeWeight(2)
+    strokeWeight(pushButtonSize * 0.04)
     rect(pos.x, pos.y, pushButtonSize, pushButtonSize)
     fill(colors.background)
     noStroke()
@@ -106,7 +106,7 @@ function pertternButton(pos, buttonColor, num) {
     // ボタン
     fill(buttonColor)
     stroke(colors.line)
-    strokeWeight(2)
+    strokeWeight(pertternButtonSize * 0.05)
     rect(pos.x, pos.y, pertternButtonSize, pertternButtonSize, 2)
     fill(colors.background)
 
