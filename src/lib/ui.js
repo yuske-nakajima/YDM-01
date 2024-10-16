@@ -13,13 +13,13 @@ function drawFrame() {
     // 影
     noStroke()
     fill(colors.shadow)
-    rect(centerPos.x + 8, centerPos.y + 5, frameSize.width * 1.01, frameSize.height * 1.01, 5)
+    rect(framePos.x + 8, framePos.y + 5, frameSize.width * 1.01, frameSize.height * 1.01, 5)
 
     // フレーム
     stroke(colors.line)
     strokeWeight(4)
     fill(colors.machineMain)
-    rect(centerPos.x, centerPos.y, frameSize.width, frameSize.height, 5)
+    rect(framePos.x, framePos.y, frameSize.width, frameSize.height, 5)
   })
 }
 

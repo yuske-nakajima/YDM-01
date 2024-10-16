@@ -31,29 +31,38 @@ function initial() {
   centerPos.x = width / 2
   centerPos.y = height / 2
 
-  frameSize.width = width * 0.9
-  frameSize.height = height * 0.9 // TODO: 中身で可変にする
+  frameGuideSize.width = width * 0.95
+  frameGuideSize.height = height * 0.9
 
-  framePos.x = centerPos.x - frameSize.width / 2
-  framePos.y = centerPos.y - frameSize.height / 2
+  frameGuidePos.x = centerPos.x - frameGuideSize.width / 2
+  frameGuidePos.y = centerPos.y - frameGuideSize.height / 2
 
-  pushButtonSize = frameSize.width * 0.07
+  pushButtonSize = frameGuideSize.width * 0.07
 
-  mainButtonAreaSize.width = frameSize.width * 0.3
+  mainButtonAreaSize.width = frameGuideSize.width * 0.3
   mainButtonAreaSize.height = pushButtonSize * 1.5
 
-  mainButtonPos.x = centerPos.x
-  mainButtonPos.y = framePos.y + mainButtonAreaSize.height * 0.65
+  gapY = mainButtonAreaSize.height * 0.4
 
-  tempoKnobPos.x = centerPos.x - frameSize.width * 0.325
+  mainButtonPos.x = centerPos.x
+  mainButtonPos.y = frameGuidePos.y + mainButtonAreaSize.height * 0.5 + gapY / 2
+
+  tempoKnobPos.x = centerPos.x - frameGuideSize.width * 0.325
   tempoKnobPos.y = mainButtonPos.y
 
-  pertternButtonPos.x = centerPos.x + frameSize.width * 0.325
+  pertternButtonPos.x = centerPos.x + frameGuideSize.width * 0.325
   pertternButtonPos.y = mainButtonPos.y
 
-  seqAreaSize.width = frameSize.width * 0.95
-  seqAreaSize.height = frameSize.height * 0.5
+  seqAreaSize.width = frameGuideSize.width * 0.95
+  seqAreaSize.height = frameGuideSize.height * 0.5 // TODO: 中身で可変にする
 
   seqAreaPos.x = centerPos.x
-  seqAreaPos.y = framePos.y + mainButtonAreaSize.height + mainButtonAreaSize.height * 0.4 + seqAreaSize.height / 2 // TODO: 中身で可変にする
+  seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
+
+  // フレーム
+  frameSize.width = frameGuideSize.width
+  frameSize.height = mainButtonAreaSize.height + gapY + seqAreaSize.height + gapY * 0.6
+
+  framePos.x = centerPos.x
+  framePos.y = frameGuidePos.y + frameSize.height / 2
 }

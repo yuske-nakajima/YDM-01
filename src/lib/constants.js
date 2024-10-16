@@ -5,6 +5,15 @@
 const colors = {}
 
 // x, y
+const frameGuidePos = {}
+
+// width, height
+const frameGuideSize = {}
+
+// number
+let gapY
+
+// x, y
 const centerPos = {}
 
 // width, height
