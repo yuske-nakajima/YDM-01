@@ -8,11 +8,11 @@ const pushedCell = {}
 let lineWeight
 let blockWidth
 
-let pertternCount = 8
+let patternCount = 8
 
 const hue = []
-for (let i = 0; i < pertternCount; i++) {
-  hue[i] = (360 / (pertternCount + 1)) * i
+for (let i = 0; i < patternCount; i++) {
+  hue[i] = (360 / (patternCount + 1)) * i
 }
 
 const masterGainObj = {
@@ -34,7 +34,7 @@ function setup() {
     fontLoaded = true
   })
 
-  blockWidth = min(windowWidth, windowHeight) / (pertternCount + 3)
+  blockWidth = min(windowWidth, windowHeight) / (patternCount + 3)
   lineWeight = blockWidth / 10
 
   createCanvas(blockWidth * 9 + lineWeight * 2, blockWidth * Object.keys(sounds).length + lineWeight * 2) // キャンバスの幅を増やす

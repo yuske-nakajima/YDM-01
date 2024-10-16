@@ -37,7 +37,7 @@ const mainButtonAreaSize = {}
 const tempoKnobPos = {}
 
 // x, y
-const pertternButtonPos = {}
+const patternButtonPos = {}
 
 // width, height
 const seqAreaSize = {}
@@ -54,7 +54,7 @@ let beatCount
 
 let lastBeatTime
 
-let currentPertternNum
+let currentPatternNum
 
 let beatData = new Map()
 

@@ -33,8 +33,8 @@ function drawTempoKnobArea() {
 }
 
 function drawPatternButtonArea() {
-  buttonArea(pertternButtonPos, mainButtonAreaSize)
-  buttonAreaText('PATTERN', pertternButtonPos, mainButtonAreaSize)
+  buttonArea(patternButtonPos, mainButtonAreaSize)
+  buttonAreaText('PATTERN', patternButtonPos, mainButtonAreaSize)
 }
 
 function drawSeqsArea() {
@@ -90,14 +90,14 @@ function drawStopButton() {
   })
 }
 
-function drawPertternButton() {
-  const startX = pertternButtonPos.x - mainButtonAreaSize.width * 0.3
+function drawPatternButton() {
+  const startX = patternButtonPos.x - mainButtonAreaSize.width * 0.3
   for (let i = 0; i < 4; i++) {
     const pos = {
       x: startX + mainButtonAreaSize.width * 0.2 * i,
-      y: pertternButtonPos.y - mainButtonAreaSize.height * 0.1,
+      y: patternButtonPos.y - mainButtonAreaSize.height * 0.1,
     }
-    pertternButton(pos, colors.buttonNormal, i + 1)
+    patternButton(pos, colors.buttonNormal, i + 1)
   }
 }
 

@@ -40,7 +40,7 @@ function initial() {
   frameGuidePos.y = centerPos.y - frameGuideSize.height / 2
 
   pushButtonSize = frameGuideSize.width * 0.07
-  pertternButtonSize = frameGuideSize.width * 0.04
+  patternButtonSize = frameGuideSize.width * 0.04
 
   mainButtonAreaSize.width = frameGuideSize.width * 0.3
   mainButtonAreaSize.height = pushButtonSize * 1.5
@@ -53,8 +53,8 @@ function initial() {
   tempoKnobPos.x = centerPos.x - frameGuideSize.width * 0.325
   tempoKnobPos.y = mainButtonPos.y
 
-  pertternButtonPos.x = centerPos.x + frameGuideSize.width * 0.325
-  pertternButtonPos.y = mainButtonPos.y
+  patternButtonPos.x = centerPos.x + frameGuideSize.width * 0.325
+  patternButtonPos.y = mainButtonPos.y
 
   seqAreaSize.width = frameGuideSize.width * 0.95
   seqAreaSize.height = frameGuideSize.height * 0.65 // TODO: 中身で可変にする
@@ -81,7 +81,7 @@ function initial() {
 
   beatCount = 0
   lastBeatTime = 0
-  currentPertternNum = 1
+  currentPatternNum = 1
 
   // バターン * 音色数 * ビート
   // データの初期化

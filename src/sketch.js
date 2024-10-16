@@ -27,7 +27,7 @@ function draw() {
   // コントロール
   drawPlayButton()
   drawStopButton()
-  drawPertternButton()
+  drawPatternButton()
 
   // 現在の時間（ミリ秒）を取得
   const currentTime = millis()
