@@ -249,23 +249,15 @@ function drawTempoKnobIndicator() {
 
   drawBlock(() => {
     noFill()
-    stroke(colors.buttonhalfDark) // アクセントカラーを使用
+    stroke(colors.buttonhalfDark)
     strokeWeight(tempoKnobControlSize.width * 0.03)
-    arc(
-      tempoKnobControlPos.x,
-      tempoKnobControlPos.y,
-      tempoKnobControlSize.width * 0.8,
-      tempoKnobControlSize.height * 0.8,
-      startAngle,
-      endAngle,
-    )
 
     // 現在の値を示す点を描画
-    fill(colors.shadow)
-    noStroke()
+    fill(colors.machineDark)
+    stroke(colors.shadow)
     const pointAngle = endAngle
     const pointX = tempoKnobControlPos.x + cos(pointAngle) * (tempoKnobControlSize.width * 0.4)
     const pointY = tempoKnobControlPos.y + sin(pointAngle) * (tempoKnobControlSize.height * 0.4)
-    ellipse(pointX, pointY, tempoKnobControlSize.width * 0.2)
+    ellipse(pointX, pointY, tempoKnobControlSize.width * 0.12)
   })
 }

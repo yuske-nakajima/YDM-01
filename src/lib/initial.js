@@ -114,4 +114,6 @@ function initial() {
   isStopping = true
 
   audioContext = new (window.AudioContext || window.webkitAudioContext)()
+
+  isDraggingTempo = false
 }

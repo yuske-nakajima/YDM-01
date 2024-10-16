@@ -11,10 +11,7 @@ function setup() {
   drawSeqsArea()
   drawSeqsName()
   // ディスプレイ
-  drawTempoDisplay()
   drawSeqLightsFrame()
-  // コントロール
-  drawTempoKnob()
 }
 
 function draw() {
@@ -22,12 +19,14 @@ function draw() {
   // フレーム
   drawSeqsFrame()
   // ディスプレイ
+  drawTempoDisplay()
   drawSeqLights()
   drawTempoNumber()
   // コントロール
   drawPlayButton()
   drawStopButton()
   drawPatternButton()
+  drawTempoKnob()
   drawTempoKnobIndicator()
 
   if (isPlaying) {
@@ -106,9 +105,54 @@ function mousePressed() {
       console.log('Sequencer is already stopped.')
     }
   }
+
+  if (isMouseOverTempoKnob()) {
+    isDraggingTempo = true
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
 }
 
 function isButtonClicked(x, y) {
   const d = dist(mouseX, mouseY, x, y)
   return d < pushButtonSize / 2
+}
+
+function mouseDragged() {
+  if (isDraggingTempo) {
+    const dy = lastMouseY - mouseY
+    const dx = mouseX - lastMouseX
+
+    // 垂直方向の動きを優先し、水平方向の動きも考慮する
+    const change = dy + dx * 0.5
+
+    // 感度調整（必要に応じて調整してください）
+    const sensitivity = 0.5
+
+    bpm = ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM))
+
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
+}
+
+function mouseReleased() {
+  isDraggingTempo = false
+}
+
+function isMouseOverTempoKnob() {
+  const d = dist(mouseX, mouseY, tempoKnobControlPos.x, tempoKnobControlPos.y)
+  return d < tempoKnobControlSize.width / 2
+}
+
+// この関数を draw() 内で呼び出してください
+function updateTempoKnob() {
+  drawTempoKnob()
+  if (isDraggingTempo) {
+    cursor(MOVE)
+  } else if (isMouseOverTempoKnob()) {
+    cursor(HAND)
+  } else {
+    cursor(AUTO)
+  }
 }

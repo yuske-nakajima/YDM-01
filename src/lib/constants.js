@@ -60,6 +60,10 @@ const tempoKnobControlPos = {}
 // width, height
 const tempoKnobControlSize = {}
 
+let isDraggingTempo
+let lastMouseY
+let lastMouseX
+
 // MUSIC
 const BEAT = 16
 const PATTERN_MAX = 4
