@@ -105,4 +105,6 @@ function initial() {
   bpm = 120
 
   isPlaying = true
+
+  audioContext = new (window.AudioContext || window.webkitAudioContext)()
 }

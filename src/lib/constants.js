@@ -69,8 +69,21 @@ let beatData = new Map()
 
 const musicList = []
 
+const musicGainList = [
+  0.8, // kick
+  0.8, // snare
+  0.8, // hihat_c
+  0.3, // hihat_o
+  1, // tom
+  0.6, // crash
+  0.28, // cowbell
+  3, // clap
+]
+
 let bpm
 
 let onBeat
 
 let isPlaying
+
+let audioContext

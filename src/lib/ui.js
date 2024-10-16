@@ -79,6 +79,12 @@ function drawSeqsFrame() {
 
         fill(cellColor)
         rect(x, y, lightSize * 2)
+
+        if (beatData.get(currentPatternNum)[i][j]) {
+          // 丸
+          fill(colors.displayMain)
+          ellipse(x, y, lightSize * 0.9)
+        }
       })
     }
   }
