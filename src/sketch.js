@@ -7,8 +7,14 @@ function setup() {
 
 function draw() {
   // UIの描画
+  // フレーム
   drawFrame()
   drawMainButtonArea()
+  drawTempoKnobArea()
+  drawPatternButtonArea()
+  drawSeqsArea()
+
+  // コントロール
   drawPlayButton()
   drawStopButton()
 }

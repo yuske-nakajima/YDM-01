@@ -5,6 +5,7 @@ function drawBackground() {
   background(colors.background)
 }
 
+// フレーム
 function drawFrame() {
   drawBlock(() => {
     rectMode(CENTER)
@@ -23,28 +24,24 @@ function drawFrame() {
 }
 
 function drawMainButtonArea() {
-  drawBlock(() => {
-    rectMode(CENTER)
-
-    // 影
-    noStroke()
-    fill(colors.shadow)
-    rect(
-      mainButtonPos.x + 5,
-      mainButtonPos.y + 5,
-      mainButtonAreaSize.width * 1.03,
-      mainButtonAreaSize.height * 1.05,
-      10,
-    )
-
-    // ボタンを置くエリア
-    stroke(colors.line)
-    strokeWeight(4)
-    fill(colors.machineSub)
-    rect(mainButtonPos.x, mainButtonPos.y, mainButtonAreaSize.width, mainButtonAreaSize.height, 10)
-  })
+  buttonArea(mainButtonPos, mainButtonAreaSize)
 }
 
+function drawTempoKnobArea() {
+  buttonArea(tempoKnobPos, mainButtonAreaSize)
+  buttonAreaText('TEMPO', tempoKnobPos, mainButtonAreaSize)
+}
+
+function drawPatternButtonArea() {
+  buttonArea(pertternButtonPos, mainButtonAreaSize)
+  buttonAreaText('PATTERN', pertternButtonPos, mainButtonAreaSize)
+}
+
+function drawSeqsArea() {
+  buttonArea(seqAreaPos, seqAreaSize, 'small')
+}
+
+// コントロール
 function drawPlayButton() {
   pushButton(createVector(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y), colors.buttonNormal, (pos, color) => {
     fill(color)

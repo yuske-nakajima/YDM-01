@@ -21,3 +21,15 @@ const mainButtonPos = {}
 
 // width, height
 const mainButtonAreaSize = {}
+
+// x, y
+const tempoKnobPos = {}
+
+// x, y
+const pertternButtonPos = {}
+
+// width, height
+const seqAreaSize = {}
+
+// x, y
+const seqAreaPos = {}
