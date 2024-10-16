@@ -16,14 +16,14 @@ function initial() {
 
   // 使用カラー設定
   colors.background = color(0, 0, 30)
-  colors.line = color(0, 0, 20)
-  colors.machineMain = color(25, 10, 100)
-  colors.machineSub = color(220, 2.5, 100)
-  colors.machineLight = color(25, 10, 60)
-  colors.machineDark = color(25, 10, 10)
-  colors.buttonNormal = color(0, 0, 100)
-  colors.shadow = color(0, 0, 20)
-  colors.textMain = color(0, 20, 70)
+  colors.line = color(220, 50, 30)
+  colors.machineMain = color(220, 10, 50)
+  colors.machineSub = color(220, 10, 70)
+  colors.machineLight = color(220, 10, 60)
+  colors.machineDark = color(220, 10, 10)
+  colors.buttonNormal = color(50, 10, 98)
+  colors.shadow = color(0, 50, 25)
+  colors.textMain = color(220, 70, 50)
   colors.displayMain = color(120, 90, 70)
   colors.displayLine = color(120, 70, 50)
 
