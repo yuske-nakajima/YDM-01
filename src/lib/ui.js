@@ -73,17 +73,20 @@ function drawSeqsFrame() {
       drawBlock(() => {
         rectMode(CENTER)
         noStroke()
+
         strokeWeight(lightSize * 0.1)
 
-        const cellColor = onBeat === j ? colors.machineLight : colors.machineMain
-
+        let cellColor = j % 4 === 0 ? colors.machineDark : colors.machineMain
+        cellColor = j === onBeat ? colors.buttonNormal : cellColor
         fill(cellColor)
+
         rect(x, y, lightSize * 2)
 
+        noStroke()
         if (beatData.get(currentPatternNum)[i][j]) {
           // 丸
           fill(colors.displayMain)
-          ellipse(x, y, lightSize * 0.9)
+          rect(x, y, lightSize * 1)
         }
       })
     }
