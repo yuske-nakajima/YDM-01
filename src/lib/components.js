@@ -93,3 +93,26 @@ function pushButton(pos, buttonColor, iconShape) {
     iconShape(pos, buttonColor)
   })
 }
+
+function pertternButton(pos, buttonColor, num) {
+  drawBlock(() => {
+    rectMode(CENTER)
+
+    // 影
+    noStroke()
+    fill(colors.shadow)
+    rect(pos.x + 3, pos.y + 3, pertternButtonSize * 1.06, pertternButtonSize * 1.04, 3)
+
+    // ボタン
+    fill(buttonColor)
+    stroke(colors.line)
+    strokeWeight(2)
+    rect(pos.x, pos.y, pertternButtonSize, pertternButtonSize, 2)
+    fill(colors.background)
+
+    // テキスト（パターン番号）
+    textAlign(CENTER, CENTER)
+    textSize(pertternButtonSize * 0.7)
+    text(num, pos.x, pos.y)
+  })
+}

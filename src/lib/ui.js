@@ -62,3 +62,14 @@ function drawStopButton() {
     rect(pos.x, pos.y, pushButtonSize * 0.5)
   })
 }
+
+function drawPertternButton() {
+  const startX = pertternButtonPos.x - mainButtonAreaSize.width * 0.3
+  for (let i = 0; i < 4; i++) {
+    const pos = {
+      x: startX + mainButtonAreaSize.width * 0.2 * i,
+      y: pertternButtonPos.y - mainButtonAreaSize.height * 0.1,
+    }
+    pertternButton(pos, colors.buttonNormal, i + 1)
+  }
+}

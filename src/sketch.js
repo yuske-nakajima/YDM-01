@@ -17,4 +17,5 @@ function draw() {
   // コントロール
   drawPlayButton()
   drawStopButton()
+  drawPertternButton()
 }

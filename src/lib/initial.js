@@ -38,6 +38,7 @@ function initial() {
   frameGuidePos.y = centerPos.y - frameGuideSize.height / 2
 
   pushButtonSize = frameGuideSize.width * 0.07
+  pertternButtonSize = frameGuideSize.width * 0.04
 
   mainButtonAreaSize.width = frameGuideSize.width * 0.3
   mainButtonAreaSize.height = pushButtonSize * 1.5
