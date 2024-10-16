@@ -1,25 +1,158 @@
 function setup() {
-  // フォントの設定
-  textFont('M PLUS Rounded 1c')
-  // フォントの読み込みを確認
-  document.fonts.ready.then(() => {
-    fontLoaded = true
-  })
+  initial()
 
-  // Hello World を表示
-  createCanvas(windowWidth * 0.99, windowHeight * 0.99)
-  background(200)
-  stroke(0)
-  strokeWeight(min(width, height) / 10)
-  rect(0, 0, width, height)
-
-  fill(0)
-  strokeWeight(0)
-  textAlign(CENTER, CENTER)
-  textSize(min(width, height) / 10)
-  text('Hello World', width / 2, height / 2)
+  // UIの描画(1回でOK)
+  drawBackground()
+  // フレーム
+  drawFrame()
+  drawMainButtonArea()
+  drawTempoKnobArea()
+  drawPatternButtonArea()
+  drawSeqsArea()
+  drawSeqsName()
+  // ディスプレイ
+  drawSeqLightsFrame()
 }
 
 function draw() {
-  // put drawing code here
+  // UIの描画
+  // フレーム
+  drawSeqsFrame()
+  // ディスプレイ
+  drawTempoDisplay()
+  drawSeqLights()
+  drawTempoNumber()
+  // コントロール
+  drawPlayButton()
+  drawStopButton()
+  drawPatternButton()
+  drawTempoKnob()
+  drawTempoKnobIndicator()
+
+  if (isPlaying) {
+    const currentTime = millis()
+    const beatInterval = 60000 / 4 / bpm
+
+    lastBeatTime = lastBeatTime || currentTime
+
+    if (currentTime - lastBeatTime >= beatInterval) {
+      play()
+      beatCount++
+      lastBeatTime = currentTime
+
+      if (isStopping && beatCount % BEAT === 0) {
+        isPlaying = false
+        isStopping = false
+        beatCount = 0
+        onBeat = 0
+        console.log('Sequencer stopped at end of bar')
+      }
+    }
+  }
+}
+
+function play() {
+  onBeat = beatCount % BEAT
+
+  for (let i = 0; i < BEAT; i++) {
+    for (let j = 0; j < musicList.length; j++) {
+      if (onBeat === i) {
+        if (beatData.get(currentPatternNum)[j][i]) {
+          musicList[j][1](musicGainList[j])
+        }
+      }
+    }
+  }
+}
+
+function mousePressed() {
+  // シーケンサーのマス目クリック判定
+  const posY = lightPos.y - seqAreaSize.height * 0.85
+  const gap = lightGap * 0.95
+
+  for (let i = 0; i < beatData.get(currentPatternNum).length; i++) {
+    for (let j = 0; j < beatData.get(currentPatternNum)[i].length; j++) {
+      const x = lightPos.x + lightSize + lightGap * j
+      const y = posY + lightSize + gap * i
+
+      const left = x - lightSize
+      const right = x + lightSize
+      const top = y - lightSize
+      const bottom = y + lightSize
+
+      if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
+        beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
+        return
+      }
+    }
+  }
+
+  // Play ボタンの判定
+  if (isButtonClicked(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y)) {
+    isPlaying = true
+    isStopping = false
+    if (beatCount === 0 || beatCount % BEAT === 0) {
+      lastBeatTime = millis()
+    }
+    console.log('Play button clicked. isPlaying:', isPlaying)
+  }
+  // Stop ボタンの判定
+  else if (isButtonClicked(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y)) {
+    if (isPlaying) {
+      isStopping = true
+      console.log('Stop button clicked. Waiting for end of bar to stop.')
+    } else {
+      console.log('Sequencer is already stopped.')
+    }
+  }
+
+  if (isMouseOverTempoKnob()) {
+    isDraggingTempo = true
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
+}
+
+function isButtonClicked(x, y) {
+  const d = dist(mouseX, mouseY, x, y)
+  return d < pushButtonSize / 2
+}
+
+function mouseDragged() {
+  if (isDraggingTempo) {
+    const dy = lastMouseY - mouseY
+    const dx = mouseX - lastMouseX
+
+    // 垂直方向の動きを優先し、水平方向の動きも考慮する
+    const change = dy + dx * 0.5
+
+    // 感度調整（必要に応じて調整してください）
+    const sensitivity = 0.5
+
+    bpm = ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM))
+
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
+}
+
+function mouseReleased() {
+  isDraggingTempo = false
+}
+
+function isMouseOverTempoKnob() {
+  const d = dist(mouseX, mouseY, tempoKnobControlPos.x, tempoKnobControlPos.y)
+  return d < tempoKnobControlSize.width / 2
+}
+
+// この関数を draw() 内で呼び出してください
+function updateTempoKnob() {
+  drawTempoKnob()
+  if (isDraggingTempo) {
+    cursor(MOVE)
+  } else if (isMouseOverTempoKnob()) {
+    cursor(HAND)
+  } else {
+    cursor(AUTO)
+  }
 }
