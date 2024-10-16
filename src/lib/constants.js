@@ -63,3 +63,5 @@ const musicList = []
 let bpm
 
 let onBeat
+
+let isPlaying

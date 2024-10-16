@@ -99,4 +99,6 @@ function initial() {
   }
 
   bpm = 120
+
+  isPlaying = true
 }

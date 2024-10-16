@@ -143,7 +143,8 @@ function drawTempoNumber() {
 
 // コントロール
 function drawPlayButton() {
-  pushButton(createVector(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y), colors.buttonNormal, (pos, color) => {
+  const buttonColor = isPlaying ? colors.buttonLight : colors.buttonNormal
+  pushButton(createVector(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y), buttonColor, (pos, color) => {
     fill(color)
     triangle(
       pos.x - pushButtonSize * 0.3,
@@ -157,7 +158,8 @@ function drawPlayButton() {
 }
 
 function drawStopButton() {
-  pushButton(createVector(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y), colors.buttonNormal, (pos, color) => {
+  const buttonColor = isPlaying ? colors.buttonNormal : colors.buttonLight
+  pushButton(createVector(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y), buttonColor, (pos, color) => {
     fill(color)
     rect(pos.x, pos.y, pushButtonSize * 0.5)
   })
@@ -170,7 +172,8 @@ function drawPatternButton() {
       x: startX + mainButtonAreaSize.width * 0.2 * i,
       y: patternButtonPos.y - mainButtonAreaSize.height * 0.1,
     }
-    patternButton(pos, colors.buttonNormal, i + 1)
+    const buttonColor = currentPatternNum === i + 1 ? colors.buttonLight : colors.buttonNormal
+    patternButton(pos, buttonColor, i + 1)
   }
 }
 
