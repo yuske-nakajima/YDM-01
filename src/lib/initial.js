@@ -57,7 +57,7 @@ function initial() {
   pertternButtonPos.y = mainButtonPos.y
 
   seqAreaSize.width = frameGuideSize.width * 0.95
-  seqAreaSize.height = frameGuideSize.height * 0.5 // TODO: 中身で可変にする
+  seqAreaSize.height = frameGuideSize.height * 0.65 // TODO: 中身で可変にする
 
   seqAreaPos.x = centerPos.x
   seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
