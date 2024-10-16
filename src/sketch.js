@@ -3,16 +3,18 @@ function setup() {
 
   // UIの描画(1回でOK)
   drawBackground()
-}
-
-function draw() {
-  // UIの描画
   // フレーム
   drawFrame()
   drawMainButtonArea()
   drawTempoKnobArea()
   drawPatternButtonArea()
   drawSeqsArea()
+  // ディスプレイ
+  drawTempoDisplay()
+}
+
+function draw() {
+  // UIの描画
 
   // コントロール
   drawPlayButton()

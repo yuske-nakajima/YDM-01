@@ -41,6 +41,33 @@ function drawSeqsArea() {
   buttonArea(seqAreaPos, seqAreaSize, 'small')
 }
 
+// ディスプレイ
+function drawTempoDisplay() {
+  const pos = {
+    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.2,
+    y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
+  }
+  const displaySize = {
+    width: mainButtonAreaSize.width * 0.5,
+    height: mainButtonAreaSize.height * 0.5,
+  }
+
+  drawBlock(() => {
+    rectMode(CENTER)
+
+    // 影
+    noStroke()
+    fill(colors.displayLine)
+    rect(pos.x + 6, pos.y + 4, displaySize.width * 1.01, displaySize.height * 1.01, 5)
+
+    // ディスプレイ
+    stroke(colors.displayLine)
+    strokeWeight(4)
+    fill(colors.displayMain)
+    rect(pos.x, pos.y, displaySize.width, displaySize.height, 5)
+  })
+}
+
 // コントロール
 function drawPlayButton() {
   pushButton(createVector(centerPos.x + pushButtonSize * 0.7, mainButtonPos.y), colors.buttonNormal, (pos, color) => {

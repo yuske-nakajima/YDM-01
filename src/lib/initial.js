@@ -17,13 +17,15 @@ function initial() {
   // 使用カラー設定
   colors.background = color(0, 0, 30)
   colors.line = color(0, 0, 20)
-  colors.machineMain = color(200, 15, 90)
-  colors.machineSub = color(75, 4, 90)
-  colors.machineLight = color(220, 10, 60)
-  colors.machineDark = color(220, 10, 10)
+  colors.machineMain = color(25, 10, 100)
+  colors.machineSub = color(220, 2.5, 100)
+  colors.machineLight = color(25, 10, 60)
+  colors.machineDark = color(25, 10, 10)
   colors.buttonNormal = color(0, 0, 100)
   colors.shadow = color(0, 0, 20)
   colors.textMain = color(0, 20, 70)
+  colors.displayMain = color(120, 90, 70)
+  colors.displayLine = color(120, 70, 50)
 
   // キャンバスの設定
   createCanvas(windowWidth * 0.99, windowHeight * 0.99)
