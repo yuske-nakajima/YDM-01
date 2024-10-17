@@ -61,6 +61,9 @@ function initial() {
   tempoKnobPos.x = centerPos.x - frameGuideSize.width * 0.325
   tempoKnobPos.y = mainButtonPos.y
 
+  volumeKnobPos.x = centerPos.x - frameGuideSize.width * 0.53
+  volumeKnobPos.y = mainButtonPos.y
+
   patternButtonPos.x = centerPos.x + frameGuideSize.width * 0.325
   patternButtonPos.y = mainButtonPos.y
 
@@ -81,10 +84,15 @@ function initial() {
   framePos.x = centerPos.x
   framePos.y = frameGuidePos.y + frameSize.height / 2
 
-  tempoKnobControlPos.x = tempoKnobPos.x + mainButtonAreaSize.width * 0.18
+  tempoKnobControlPos.x = tempoKnobPos.x + mainButtonAreaSize.width * 0.35
   tempoKnobControlPos.y = tempoKnobPos.y - mainButtonAreaSize.height * 0.125
   tempoKnobControlSize.width = mainButtonAreaSize.width * 0.2
   tempoKnobControlSize.height = mainButtonAreaSize.width * 0.2
+
+  volumeKnobControlPos.x = volumeKnobPos.x + mainButtonAreaSize.width * 0.35
+  volumeKnobControlPos.y = volumeKnobPos.y - mainButtonAreaSize.height * 0.125
+  volumeKnobControlSize.width = mainButtonAreaSize.width * 0.2
+  volumeKnobControlSize.height = mainButtonAreaSize.width * 0.2
 
   // MUSIC
   musicList[0] = ['kick', sounds.kick[6]]
@@ -119,9 +127,12 @@ function initial() {
   bpm = getOrInitializeValue('bpm', 120)
 
   isPlaying = false
-  isStopping = true
+  isStopping = false
 
   audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
   isDraggingTempo = false
+  isDraggingVolume = false
+
+  volume = getOrInitializeValue('volume', 1)
 }

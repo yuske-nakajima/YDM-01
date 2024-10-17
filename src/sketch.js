@@ -1,3 +1,4 @@
+// --- p5.js イベント関数のみ ---
 function setup() {
   initial()
 
@@ -26,8 +27,10 @@ function draw() {
   drawPlayButton()
   drawStopButton()
   drawPatternButton()
-  drawTempoKnob()
+  updateTempoKnob()
   drawTempoKnobIndicator()
+  updateVolumeKnob()
+  drawVolumeKnobIndicator()
 
   if (isPlaying) {
     const currentTime = millis()
@@ -44,20 +47,6 @@ function draw() {
         isPlaying = false
         isStopping = false
         onBeat = 0
-      }
-    }
-  }
-}
-
-function play() {
-  onBeat = beatCount % BEAT
-
-  for (let i = 0; i < BEAT; i++) {
-    for (let j = 0; j < musicList.length; j++) {
-      if (onBeat === i) {
-        if (beatData.get(currentPatternNum)[j][i]) {
-          musicList[j][1](musicGainList[j])
-        }
       }
     }
   }
@@ -120,11 +109,12 @@ function mousePressed() {
     lastMouseY = mouseY
     lastMouseX = mouseX
   }
-}
 
-function isButtonClicked(x, y) {
-  const d = dist(mouseX, mouseY, x, y)
-  return d < pushButtonSize / 2
+  if (isMouseOverVolumeKnob()) {
+    isDraggingVolume = true
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
 }
 
 function mouseDragged() {
@@ -143,25 +133,25 @@ function mouseDragged() {
     lastMouseY = mouseY
     lastMouseX = mouseX
   }
+
+  if (isDraggingVolume) {
+    const dy = lastMouseY - mouseY
+    const dx = mouseX - lastMouseX
+
+    // 垂直方向の動きを優先し、水平方向の動きも考慮する
+    const change = dy + dx * 0.5
+
+    // 感度調整（必要に応じて調整してください）
+    const sensitivity = 0.01
+
+    volume = saveToLocalStorage('volume', constrain(volume + change * sensitivity, MIN_VOLUME, MAX_VOLUME))
+
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
 }
 
 function mouseReleased() {
   isDraggingTempo = false
-}
-
-function isMouseOverTempoKnob() {
-  const d = dist(mouseX, mouseY, tempoKnobControlPos.x, tempoKnobControlPos.y)
-  return d < tempoKnobControlSize.width / 2
-}
-
-// この関数を draw() 内で呼び出してください
-function updateTempoKnob() {
-  drawTempoKnob()
-  if (isDraggingTempo) {
-    cursor(MOVE)
-  } else if (isMouseOverTempoKnob()) {
-    cursor(HAND)
-  } else {
-    cursor(AUTO)
-  }
+  isDraggingVolume = false
 }

@@ -37,6 +37,9 @@ const mainButtonAreaSize = {}
 const tempoKnobPos = {}
 
 // x, y
+const volumeKnobPos = {}
+
+// x, y
 const patternButtonPos = {}
 
 // width, height
@@ -60,7 +63,14 @@ const tempoKnobControlPos = {}
 // width, height
 const tempoKnobControlSize = {}
 
+// x, y
+const volumeKnobControlPos = {}
+
+// width, height
+const volumeKnobControlSize = {}
+
 let isDraggingTempo
+let isDraggingVolume
 let lastMouseY
 let lastMouseX
 
@@ -101,3 +111,8 @@ let audioContext
 
 const MIN_BPM = 0
 const MAX_BPM = 240
+
+let volume
+
+const MIN_VOLUME = 0
+const MAX_VOLUME = 2
