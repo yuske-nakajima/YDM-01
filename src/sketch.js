@@ -43,9 +43,7 @@ function draw() {
       if (isStopping && beatCount % BEAT === 0) {
         isPlaying = false
         isStopping = false
-        beatCount = 0
         onBeat = 0
-        console.log('Sequencer stopped at end of bar')
       }
     }
   }
@@ -94,15 +92,11 @@ function mousePressed() {
     if (beatCount === 0 || beatCount % BEAT === 0) {
       lastBeatTime = millis()
     }
-    console.log('Play button clicked. isPlaying:', isPlaying)
   }
   // Stop ボタンの判定
   else if (isButtonClicked(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y)) {
     if (isPlaying) {
       isStopping = true
-      console.log('Stop button clicked. Waiting for end of bar to stop.')
-    } else {
-      console.log('Sequencer is already stopped.')
     }
   }
 

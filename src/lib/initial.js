@@ -82,7 +82,7 @@ function initial() {
 
   // MUSIC
   musicList[0] = ['kick', sounds.kick[6]]
-  musicList[1] = ['snare', sounds.snare[7]]
+  musicList[1] = ['snare', sounds.snare[0]]
   musicList[2] = ['hihat_c', sounds.hihat_c[7]]
   musicList[3] = ['hihat_o', sounds.hihat_o[7]]
   musicList[4] = ['tom', sounds.tom[4]]

@@ -77,14 +77,13 @@ function drawSeqsFrame() {
         strokeWeight(lightSize * 0.1)
 
         let cellColor = j % 4 === 0 ? colors.machineDark : colors.machineMain
-        cellColor = j === onBeat ? colors.buttonNormal : cellColor
+        cellColor = j === (isPlaying && onBeat) ? colors.buttonNormal : cellColor
         fill(cellColor)
 
         rect(x, y, lightSize * 2)
 
         noStroke()
         if (beatData.get(currentPatternNum)[i][j]) {
-          // 丸
           fill(colors.displayMain)
           rect(x, y, lightSize * 1)
         }
@@ -152,7 +151,7 @@ function drawSeqLights() {
       strokeWeight(lightSize * 0.1)
 
       // 点灯
-      if (i === onBeat) {
+      if (isPlaying && i === onBeat) {
         fill(colors.buttonLight)
         ellipse(x, y, lightSize * 0.9)
       } else {
