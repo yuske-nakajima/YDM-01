@@ -64,6 +64,20 @@ function play() {
 }
 
 function mousePressed() {
+  // パターンボタンのクリック判定
+  const startX = patternButtonPos.x - mainButtonAreaSize.width * 0.3
+  for (let i = 0; i < 4; i++) {
+    const pos = {
+      x: startX + mainButtonAreaSize.width * 0.2 * i - patternButtonSize / 2,
+      y: patternButtonPos.y - mainButtonAreaSize.height * 0.1 - patternButtonSize / 2,
+    }
+    if (mouseX > pos.x && mouseX < pos.x + patternButtonSize && mouseY > pos.y && mouseY < pos.y + patternButtonSize) {
+      currentPatternNum = i + 1
+      saveToLocalStorage('currentPatternNum', currentPatternNum)
+      break
+    }
+  }
+
   // シーケンサーのマス目クリック判定
   const posY = lightPos.y - seqAreaSize.height * 0.85
   const gap = lightGap * 0.95
@@ -81,7 +95,7 @@ function mousePressed() {
       if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
         beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
         saveToLocalStorage('beatData', beatData)
-        return
+        break
       }
     }
   }

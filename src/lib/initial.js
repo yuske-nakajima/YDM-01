@@ -92,7 +92,7 @@ function initial() {
 
   beatCount = 0
   lastBeatTime = 0
-  currentPatternNum = 1
+  currentPatternNum = getOrInitializeValue('currentPatternNum', 1)
 
   // バターン * 音色数 * ビート
   // データの初期化
