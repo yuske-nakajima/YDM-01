@@ -96,6 +96,7 @@ function initial() {
 
   // バターン * 音色数 * ビート
   // データの初期化
+  const initBeatData = new Map()
   for (let i = 1; i <= PATTERN_MAX; i++) {
     const arr = []
     for (let m = 0; m < musicList.length; m++) {
@@ -105,10 +106,11 @@ function initial() {
       }
       arr.push(innerArr)
     }
-    beatData.set(i, arr)
+    initBeatData.set(i, arr)
   }
+  beatData = getOrInitializeValue('beatData', initBeatData)
 
-  bpm = 120
+  bpm = getOrInitializeValue('bpm', 120)
 
   isPlaying = false
   isStopping = true

@@ -80,6 +80,7 @@ function mousePressed() {
 
       if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
         beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
+        saveToLocalStorage('beatData', beatData)
         return
       }
     }
@@ -123,7 +124,7 @@ function mouseDragged() {
     // 感度調整（必要に応じて調整してください）
     const sensitivity = 0.5
 
-    bpm = ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM))
+    bpm = saveToLocalStorage('bpm', ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM)))
 
     lastMouseY = mouseY
     lastMouseX = mouseX
