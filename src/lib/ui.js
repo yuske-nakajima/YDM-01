@@ -61,7 +61,7 @@ function drawSeqsName() {
   const posY = lightPos.y - seqAreaSize.height * 0.85
   const gap = {
     x: lightGap.x * 0.95,
-    y: lightGap.y * 0.9,
+    y: lightGap.y * 0.85,
   }
 
   for (let i = 0; i < musicList.length; i++) {
@@ -83,7 +83,7 @@ function drawSeqsFrame() {
   const posY = lightPos.y - seqAreaSize.height * 0.85
   const gap = {
     x: lightGap.x * 0.95,
-    y: lightGap.y * 0.9,
+    y: lightGap.y * 0.85,
   }
 
   for (let i = 0; i < beatData.get(currentPatternNum).length; i++) {
