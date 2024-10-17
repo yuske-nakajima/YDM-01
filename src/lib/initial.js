@@ -30,7 +30,12 @@ function initial() {
   colors.displayLine = color(120, 70, 50)
   colors.displayText = color(120, 70, 95)
   // キャンバスの設定
-  createCanvas(windowWidth * 0.99, windowHeight * 0.99)
+
+  if (windowWidth > windowHeight) {
+    createCanvas(windowWidth * 0.75, windowHeight * 0.99)
+  } else {
+    createCanvas(windowWidth * 0.99, windowHeight * 0.75)
+  }
 
   centerPos.x = width / 2
   centerPos.y = height / 2
@@ -59,7 +64,7 @@ function initial() {
   patternButtonPos.y = mainButtonPos.y
 
   seqAreaSize.width = frameGuideSize.width * 0.95
-  seqAreaSize.height = frameGuideSize.height * 0.65 // TODO: 中身で可変にする
+  seqAreaSize.height = frameGuideSize.height * 0.75
 
   seqAreaPos.x = centerPos.x
   seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
