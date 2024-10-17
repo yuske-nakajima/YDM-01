@@ -24,6 +24,7 @@ function initial() {
   colors.buttonhalfDark = color(50, 10, 70)
   colors.buttonNormal = color(50, 10, 98)
   colors.buttonLight = color(0, 50, 100)
+  colors.buttonStopping = color(220, 50, 100)
   colors.shadow = color(0, 50, 25)
   colors.textMain = color(220, 70, 50)
   colors.displayMain = color(120, 90, 70)
@@ -67,7 +68,7 @@ function initial() {
   seqAreaSize.height = frameGuideSize.height * 0.75
 
   seqAreaPos.x = centerPos.x
-  seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
+  seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2
 
   lightSize = seqAreaSize.width * 0.02
   lightGap = (seqAreaSize.width / BEAT) * 0.9

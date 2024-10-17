@@ -195,7 +195,8 @@ function drawPlayButton() {
 }
 
 function drawStopButton() {
-  const buttonColor = isPlaying ? colors.buttonNormal : colors.buttonLight
+  let buttonColor = isPlaying ? colors.buttonNormal : colors.buttonLight
+  buttonColor = isStopping ? colors.buttonStopping : buttonColor
   pushButton(createVector(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y), buttonColor, (pos, color) => {
     fill(color)
     rect(pos.x, pos.y, pushButtonSize * 0.5)
