@@ -24,13 +24,19 @@ function initial() {
   colors.buttonhalfDark = color(50, 10, 70)
   colors.buttonNormal = color(50, 10, 98)
   colors.buttonLight = color(0, 50, 100)
+  colors.buttonStopping = color(220, 50, 100)
   colors.shadow = color(0, 50, 25)
   colors.textMain = color(220, 70, 50)
   colors.displayMain = color(120, 90, 70)
   colors.displayLine = color(120, 70, 50)
   colors.displayText = color(120, 70, 95)
   // キャンバスの設定
-  createCanvas(windowWidth * 0.99, windowHeight * 0.99)
+
+  if (windowWidth > windowHeight) {
+    createCanvas(windowWidth * 0.75, windowHeight * 0.99)
+  } else {
+    createCanvas(windowWidth * 0.99, windowHeight * 0.75)
+  }
 
   centerPos.x = width / 2
   centerPos.y = height / 2
@@ -55,14 +61,17 @@ function initial() {
   tempoKnobPos.x = centerPos.x - frameGuideSize.width * 0.325
   tempoKnobPos.y = mainButtonPos.y
 
+  volumeKnobPos.x = centerPos.x - frameGuideSize.width * 0.53
+  volumeKnobPos.y = mainButtonPos.y
+
   patternButtonPos.x = centerPos.x + frameGuideSize.width * 0.325
   patternButtonPos.y = mainButtonPos.y
 
   seqAreaSize.width = frameGuideSize.width * 0.95
-  seqAreaSize.height = frameGuideSize.height * 0.65 // TODO: 中身で可変にする
+  seqAreaSize.height = frameGuideSize.height * 0.75
 
   seqAreaPos.x = centerPos.x
-  seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2 // TODO: 中身で可変にする
+  seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2
 
   lightSize = seqAreaSize.width * 0.02
   lightGap = (seqAreaSize.width / BEAT) * 0.9
@@ -75,14 +84,19 @@ function initial() {
   framePos.x = centerPos.x
   framePos.y = frameGuidePos.y + frameSize.height / 2
 
-  tempoKnobControlPos.x = tempoKnobPos.x + mainButtonAreaSize.width * 0.18
+  tempoKnobControlPos.x = tempoKnobPos.x + mainButtonAreaSize.width * 0.35
   tempoKnobControlPos.y = tempoKnobPos.y - mainButtonAreaSize.height * 0.125
   tempoKnobControlSize.width = mainButtonAreaSize.width * 0.2
   tempoKnobControlSize.height = mainButtonAreaSize.width * 0.2
 
+  volumeKnobControlPos.x = volumeKnobPos.x + mainButtonAreaSize.width * 0.35
+  volumeKnobControlPos.y = volumeKnobPos.y - mainButtonAreaSize.height * 0.125
+  volumeKnobControlSize.width = mainButtonAreaSize.width * 0.2
+  volumeKnobControlSize.height = mainButtonAreaSize.width * 0.2
+
   // MUSIC
   musicList[0] = ['kick', sounds.kick[6]]
-  musicList[1] = ['snare', sounds.snare[7]]
+  musicList[1] = ['snare', sounds.snare[0]]
   musicList[2] = ['hihat_c', sounds.hihat_c[7]]
   musicList[3] = ['hihat_o', sounds.hihat_o[7]]
   musicList[4] = ['tom', sounds.tom[4]]
@@ -92,10 +106,11 @@ function initial() {
 
   beatCount = 0
   lastBeatTime = 0
-  currentPatternNum = 1
+  currentPatternNum = getOrInitializeValue('currentPatternNum', 1)
 
   // バターン * 音色数 * ビート
   // データの初期化
+  const initBeatData = new Map()
   for (let i = 1; i <= PATTERN_MAX; i++) {
     const arr = []
     for (let m = 0; m < musicList.length; m++) {
@@ -105,15 +120,19 @@ function initial() {
       }
       arr.push(innerArr)
     }
-    beatData.set(i, arr)
+    initBeatData.set(i, arr)
   }
+  beatData = getOrInitializeValue('beatData', initBeatData)
 
-  bpm = 120
+  bpm = getOrInitializeValue('bpm', 120)
 
   isPlaying = false
-  isStopping = true
+  isStopping = false
 
   audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
   isDraggingTempo = false
+  isDraggingVolume = false
+
+  volume = getOrInitializeValue('volume', 1)
 }

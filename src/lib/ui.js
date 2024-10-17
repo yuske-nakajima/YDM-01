@@ -29,7 +29,22 @@ function drawMainButtonArea() {
 
 function drawTempoKnobArea() {
   buttonArea(tempoKnobPos, mainButtonAreaSize)
-  buttonAreaText('TEMPO', tempoKnobPos, mainButtonAreaSize)
+  buttonAreaText(
+    'TEMPO',
+    {
+      x: tempoKnobPos.x + mainButtonAreaSize.width * 0.15,
+      y: tempoKnobPos.y,
+    },
+    mainButtonAreaSize,
+  )
+  buttonAreaText(
+    'VOLUME',
+    {
+      x: tempoKnobPos.x - mainButtonAreaSize.width * 0.325,
+      y: tempoKnobPos.y,
+    },
+    mainButtonAreaSize,
+  )
 }
 
 function drawPatternButtonArea() {
@@ -77,14 +92,13 @@ function drawSeqsFrame() {
         strokeWeight(lightSize * 0.1)
 
         let cellColor = j % 4 === 0 ? colors.machineDark : colors.machineMain
-        cellColor = j === onBeat ? colors.buttonNormal : cellColor
+        cellColor = j === (isPlaying && onBeat) ? colors.buttonNormal : cellColor
         fill(cellColor)
 
         rect(x, y, lightSize * 2)
 
         noStroke()
         if (beatData.get(currentPatternNum)[i][j]) {
-          // 丸
           fill(colors.displayMain)
           rect(x, y, lightSize * 1)
         }
@@ -96,7 +110,7 @@ function drawSeqsFrame() {
 // ディスプレイ
 function drawTempoDisplay() {
   const pos = {
-    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.15,
+    x: tempoKnobPos.x + mainButtonAreaSize.width * 0.03,
     y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
   }
   const size = {
@@ -152,7 +166,7 @@ function drawSeqLights() {
       strokeWeight(lightSize * 0.1)
 
       // 点灯
-      if (i === onBeat) {
+      if (isPlaying && i === onBeat) {
         fill(colors.buttonLight)
         ellipse(x, y, lightSize * 0.9)
       } else {
@@ -165,7 +179,7 @@ function drawSeqLights() {
 
 function drawTempoNumber() {
   const pos = {
-    x: tempoKnobPos.x - mainButtonAreaSize.width * 0.15,
+    x: tempoKnobPos.x + mainButtonAreaSize.width * 0.03,
     y: tempoKnobPos.y - mainButtonAreaSize.height * 0.125,
   }
 
@@ -196,7 +210,8 @@ function drawPlayButton() {
 }
 
 function drawStopButton() {
-  const buttonColor = isPlaying ? colors.buttonNormal : colors.buttonLight
+  let buttonColor = isPlaying ? colors.buttonNormal : colors.buttonLight
+  buttonColor = isStopping ? colors.buttonStopping : buttonColor
   pushButton(createVector(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y), buttonColor, (pos, color) => {
     fill(color)
     rect(pos.x, pos.y, pushButtonSize * 0.5)
@@ -259,5 +274,52 @@ function drawTempoKnobIndicator() {
     const pointX = tempoKnobControlPos.x + cos(pointAngle) * (tempoKnobControlSize.width * 0.4)
     const pointY = tempoKnobControlPos.y + sin(pointAngle) * (tempoKnobControlSize.height * 0.4)
     ellipse(pointX, pointY, tempoKnobControlSize.width * 0.12)
+  })
+}
+
+function drawVolumeKnob() {
+  drawBlock(() => {
+    ellipseMode(CENTER)
+
+    // 影
+    noStroke()
+    fill(colors.shadow)
+    ellipse(
+      volumeKnobControlPos.x + 3,
+      volumeKnobControlPos.y + 3,
+      volumeKnobControlSize.width * 1.06,
+      volumeKnobControlSize.height * 1.08,
+    )
+
+    // ノブ
+    fill(colors.buttonNormal)
+    stroke(colors.line)
+    strokeWeight(volumeKnobControlSize.width * 0.05)
+    ellipse(volumeKnobControlPos.x, volumeKnobControlPos.y, volumeKnobControlSize.width, volumeKnobControlSize.height)
+
+    // 内側
+    noFill()
+    stroke(colors.line)
+    strokeWeight(volumeKnobControlSize.width * 0.02)
+    ellipse(volumeKnobControlPos.x, volumeKnobControlPos.y, volumeKnobControlSize.width * 0.5)
+  })
+}
+
+function drawVolumeKnobIndicator() {
+  const startAngle = HALF_PI // 9時から開始
+  const endAngle = map(volume, MIN_VOLUME, MAX_VOLUME, 0, TWO_PI) + startAngle
+
+  drawBlock(() => {
+    noFill()
+    stroke(colors.buttonhalfDark)
+    strokeWeight(volumeKnobControlSize.width * 0.03)
+
+    // 現在の値を示す点を描画
+    fill(colors.machineDark)
+    stroke(colors.shadow)
+    const pointAngle = endAngle
+    const pointX = volumeKnobControlPos.x + cos(pointAngle) * (volumeKnobControlSize.width * 0.4)
+    const pointY = volumeKnobControlPos.y + sin(pointAngle) * (volumeKnobControlSize.height * 0.4)
+    ellipse(pointX, pointY, volumeKnobControlSize.width * 0.12)
   })
 }

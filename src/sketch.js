@@ -1,3 +1,4 @@
+// --- p5.js イベント関数のみ ---
 function setup() {
   initial()
 
@@ -26,8 +27,10 @@ function draw() {
   drawPlayButton()
   drawStopButton()
   drawPatternButton()
-  drawTempoKnob()
+  updateTempoKnob()
   drawTempoKnobIndicator()
+  updateVolumeKnob()
+  drawVolumeKnobIndicator()
 
   if (isPlaying) {
     const currentTime = millis()
@@ -43,29 +46,27 @@ function draw() {
       if (isStopping && beatCount % BEAT === 0) {
         isPlaying = false
         isStopping = false
-        beatCount = 0
         onBeat = 0
-        console.log('Sequencer stopped at end of bar')
-      }
-    }
-  }
-}
-
-function play() {
-  onBeat = beatCount % BEAT
-
-  for (let i = 0; i < BEAT; i++) {
-    for (let j = 0; j < musicList.length; j++) {
-      if (onBeat === i) {
-        if (beatData.get(currentPatternNum)[j][i]) {
-          musicList[j][1](musicGainList[j])
-        }
       }
     }
   }
 }
 
 function mousePressed() {
+  // パターンボタンのクリック判定
+  const startX = patternButtonPos.x - mainButtonAreaSize.width * 0.3
+  for (let i = 0; i < 4; i++) {
+    const pos = {
+      x: startX + mainButtonAreaSize.width * 0.2 * i - patternButtonSize / 2,
+      y: patternButtonPos.y - mainButtonAreaSize.height * 0.1 - patternButtonSize / 2,
+    }
+    if (mouseX > pos.x && mouseX < pos.x + patternButtonSize && mouseY > pos.y && mouseY < pos.y + patternButtonSize) {
+      currentPatternNum = i + 1
+      saveToLocalStorage('currentPatternNum', currentPatternNum)
+      break
+    }
+  }
+
   // シーケンサーのマス目クリック判定
   const posY = lightPos.y - seqAreaSize.height * 0.85
   const gap = lightGap * 0.95
@@ -82,7 +83,8 @@ function mousePressed() {
 
       if (mouseX > left && mouseX < right && mouseY > top && mouseY < bottom) {
         beatData.get(currentPatternNum)[i][j] = !beatData.get(currentPatternNum)[i][j]
-        return
+        saveToLocalStorage('beatData', beatData)
+        break
       }
     }
   }
@@ -94,15 +96,11 @@ function mousePressed() {
     if (beatCount === 0 || beatCount % BEAT === 0) {
       lastBeatTime = millis()
     }
-    console.log('Play button clicked. isPlaying:', isPlaying)
   }
   // Stop ボタンの判定
   else if (isButtonClicked(centerPos.x - pushButtonSize * 0.7, mainButtonPos.y)) {
     if (isPlaying) {
       isStopping = true
-      console.log('Stop button clicked. Waiting for end of bar to stop.')
-    } else {
-      console.log('Sequencer is already stopped.')
     }
   }
 
@@ -111,11 +109,12 @@ function mousePressed() {
     lastMouseY = mouseY
     lastMouseX = mouseX
   }
-}
 
-function isButtonClicked(x, y) {
-  const d = dist(mouseX, mouseY, x, y)
-  return d < pushButtonSize / 2
+  if (isMouseOverVolumeKnob()) {
+    isDraggingVolume = true
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
 }
 
 function mouseDragged() {
@@ -129,7 +128,23 @@ function mouseDragged() {
     // 感度調整（必要に応じて調整してください）
     const sensitivity = 0.5
 
-    bpm = ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM))
+    bpm = saveToLocalStorage('bpm', ceil(constrain(bpm + change * sensitivity, MIN_BPM, MAX_BPM)))
+
+    lastMouseY = mouseY
+    lastMouseX = mouseX
+  }
+
+  if (isDraggingVolume) {
+    const dy = lastMouseY - mouseY
+    const dx = mouseX - lastMouseX
+
+    // 垂直方向の動きを優先し、水平方向の動きも考慮する
+    const change = dy + dx * 0.5
+
+    // 感度調整（必要に応じて調整してください）
+    const sensitivity = 0.01
+
+    volume = saveToLocalStorage('volume', constrain(volume + change * sensitivity, MIN_VOLUME, MAX_VOLUME))
 
     lastMouseY = mouseY
     lastMouseX = mouseX
@@ -138,21 +153,5 @@ function mouseDragged() {
 
 function mouseReleased() {
   isDraggingTempo = false
-}
-
-function isMouseOverTempoKnob() {
-  const d = dist(mouseX, mouseY, tempoKnobControlPos.x, tempoKnobControlPos.y)
-  return d < tempoKnobControlSize.width / 2
-}
-
-// この関数を draw() 内で呼び出してください
-function updateTempoKnob() {
-  drawTempoKnob()
-  if (isDraggingTempo) {
-    cursor(MOVE)
-  } else if (isMouseOverTempoKnob()) {
-    cursor(HAND)
-  } else {
-    cursor(AUTO)
-  }
+  isDraggingVolume = false
 }

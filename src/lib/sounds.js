@@ -216,14 +216,14 @@ function playClosedHiHatSound(variation, masterGainValue) {
   masterGain.connect(audioContext.destination)
 
   const hihatParams = [
-    { fundamental: 40, bandwidth: 8000, highpass: 7000, duration: 0.05, gain: 1.0 }, // Tight
-    { fundamental: 60, bandwidth: 10000, highpass: 8000, duration: 0.08, gain: 0.9 }, // Bright
-    { fundamental: 35, bandwidth: 6000, highpass: 6000, duration: 0.06, gain: 1.1 }, // Dark
-    { fundamental: 50, bandwidth: 9000, highpass: 7500, duration: 0.04, gain: 1.2 }, // Crisp
-    { fundamental: 45, bandwidth: 7000, highpass: 6500, duration: 0.07, gain: 0.8 }, // Smooth
-    { fundamental: 55, bandwidth: 11000, highpass: 8500, duration: 0.03, gain: 1.3 }, // Sharp
-    { fundamental: 30, bandwidth: 5000, highpass: 5500, duration: 0.09, gain: 0.7 }, // Low
-    { fundamental: 65, bandwidth: 12000, highpass: 9000, duration: 0.02, gain: 1.4 }, // High
+    { fundamental: 40, bandwidth: 8000, highpass: 7000, duration: 0.05 }, // Tight
+    { fundamental: 60, bandwidth: 10000, highpass: 8000, duration: 0.08 }, // Bright
+    { fundamental: 35, bandwidth: 6000, highpass: 6000, duration: 0.06 }, // Dark
+    { fundamental: 50, bandwidth: 9000, highpass: 7500, duration: 0.04 }, // Crisp
+    { fundamental: 45, bandwidth: 7000, highpass: 6500, duration: 0.07 }, // Smooth
+    { fundamental: 55, bandwidth: 11000, highpass: 8500, duration: 0.03 }, // Sharp
+    { fundamental: 30, bandwidth: 5000, highpass: 5500, duration: 0.09 }, // Low
+    { fundamental: 65, bandwidth: 12000, highpass: 9000, duration: 0.02 }, // High
   ]
 
   const params = hihatParams[variation]
@@ -233,7 +233,7 @@ function playClosedHiHatSound(variation, masterGainValue) {
   highpass.frequency.setValueAtTime(params.highpass, audioContext.currentTime)
 
   masterGain.gain.setValueAtTime(masterGainValue, audioContext.currentTime)
-  masterGain.gain.linearRampToValueAtTime(params.gain, audioContext.currentTime + 0.001)
+  masterGain.gain.linearRampToValueAtTime(masterGainValue, audioContext.currentTime + 0.001)
   masterGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + params.duration)
 
   ratios.forEach((ratio) => {
