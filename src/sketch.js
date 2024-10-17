@@ -155,3 +155,18 @@ function mouseReleased() {
   isDraggingTempo = false
   isDraggingVolume = false
 }
+
+function touchStarted() {
+  mousePressed();
+  return false;
+}
+
+function touchMoved() {
+  mouseDragged();
+  return false;
+}
+
+function touchEnded() {
+  mouseReleased();
+  return false;
+}
