@@ -69,12 +69,15 @@ function mousePressed() {
 
   // シーケンサーのマス目クリック判定
   const posY = lightPos.y - seqAreaSize.height * 0.85
-  const gap = lightGap * 0.95
+  const gap = {
+    x: lightGap.x * 0.95,
+    y: lightGap.y * 0.9,
+  }
 
   for (let i = 0; i < beatData.get(currentPatternNum).length; i++) {
     for (let j = 0; j < beatData.get(currentPatternNum)[i].length; j++) {
-      const x = lightPos.x + lightSize + lightGap * j
-      const y = posY + lightSize + gap * i
+      const x = lightPos.x + lightSize + lightGap.x * j
+      const y = posY + lightSize + gap.y * i
 
       const left = x - lightSize
       const right = x + lightSize
@@ -157,16 +160,16 @@ function mouseReleased() {
 }
 
 function touchStarted() {
-  mousePressed();
-  return false;
+  mousePressed()
+  return false
 }
 
 function touchMoved() {
-  mouseDragged();
-  return false;
+  mouseDragged()
+  return false
 }
 
 function touchEnded() {
-  mouseReleased();
-  return false;
+  mouseReleased()
+  return false
 }

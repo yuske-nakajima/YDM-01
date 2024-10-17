@@ -59,11 +59,14 @@ function drawSeqsArea() {
 function drawSeqsName() {
   // musicList から取得
   const posY = lightPos.y - seqAreaSize.height * 0.85
-  const gap = lightGap * 0.95
+  const gap = {
+    x: lightGap.x * 0.95,
+    y: lightGap.y * 0.9,
+  }
 
   for (let i = 0; i < musicList.length; i++) {
     const x = lightPos.x - lightSize * 2.5
-    const y = posY + lightSize + gap * i
+    const y = posY + lightSize + gap.y * i
 
     drawBlock(() => {
       rectMode(CENTER)
@@ -78,12 +81,15 @@ function drawSeqsName() {
 
 function drawSeqsFrame() {
   const posY = lightPos.y - seqAreaSize.height * 0.85
-  const gap = lightGap * 0.95
+  const gap = {
+    x: lightGap.x * 0.95,
+    y: lightGap.y * 0.9,
+  }
 
   for (let i = 0; i < beatData.get(currentPatternNum).length; i++) {
     for (let j = 0; j < beatData.get(currentPatternNum)[i].length; j++) {
-      const x = lightPos.x + lightSize + lightGap * j
-      const y = posY + lightSize + gap * i
+      const x = lightPos.x + lightSize + lightGap.x * j
+      const y = posY + lightSize + gap.y * i
 
       drawBlock(() => {
         rectMode(CENTER)
@@ -136,7 +142,7 @@ function drawTempoDisplay() {
 
 function drawSeqLightsFrame() {
   for (let i = 0; i < 16; i++) {
-    const x = lightPos.x + lightSize + lightGap * i
+    const x = lightPos.x + lightSize + lightGap.x * i
     const y = lightPos.y
     drawBlock(() => {
       ellipseMode(CENTER)
@@ -158,7 +164,7 @@ function drawSeqLightsFrame() {
 
 function drawSeqLights() {
   for (let i = 0; i < 16; i++) {
-    const x = lightPos.x + lightSize + lightGap * i
+    const x = lightPos.x + lightSize + lightGap.x * i
     const y = lightPos.y
     drawBlock(() => {
       ellipseMode(CENTER)

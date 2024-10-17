@@ -70,11 +70,16 @@ function initial() {
   seqAreaSize.width = frameGuideSize.width * 0.95
   seqAreaSize.height = frameGuideSize.height * 0.75
 
+  lightSize = seqAreaSize.width * 0.02
+  lightGap = {
+    x: (seqAreaSize.width / BEAT) * 0.9,
+    y: (seqAreaSize.width / BEAT) * 0.8,
+  }
+  seqAreaSize.height = min(seqAreaSize.height, lightSize * 25 * (musicList.length + 1))
+
   seqAreaPos.x = centerPos.x
   seqAreaPos.y = frameGuidePos.y + mainButtonAreaSize.height + gapY + seqAreaSize.height / 2
 
-  lightSize = seqAreaSize.width * 0.02
-  lightGap = (seqAreaSize.width / BEAT) * 0.9
   lightPos.x = seqAreaPos.x - seqAreaSize.width * 0.4
   lightPos.y = seqAreaPos.y + seqAreaSize.height * 0.4
 

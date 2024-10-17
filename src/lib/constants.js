@@ -51,8 +51,8 @@ const seqAreaPos = {}
 // number
 let lightSize
 
-// number
-let lightGap
+// x, y
+let lightGap = {}
 
 // x, y
 const lightPos = {}
